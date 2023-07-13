@@ -1,6 +1,7 @@
 import fastapi
 import uvicorn
-# import fastapi_chameleon
+from fastapi_chameleon import template
+import fastapi_chameleon
 from views import home
 from views import account
 from views import packages
@@ -12,24 +13,11 @@ app = fastapi.FastAPI()
 fastapi_chameleon.global_init('templates')
 
 @app.get('/')
-def index():
-    content = """
-    
-    
-    
-    
-    <h1> Hello</h1>
-    <div>This is the place for the app</div>
-    """
-    
-
-    
-    
-    resp = fastapi.responses.HTMLResponse(content)
-    return resp
-
-# This had to be added to let the app know where the templates are.
-# fastapi_chameleon.global_init('templates')
+@template(template_file='index.html')
+def index(user: str = 'anon'):
+    return {
+        'user_name': user
+    }
 
 app.include_router(home.router)
 app.include_router(account.router)

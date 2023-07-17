@@ -3,14 +3,23 @@ from fastapi_chameleon import template
 
 router = fastapi.APIRouter()
 
+
 @router.get('/')
-@template(template_file='index.html') #this brings in the html file
-async def index(user: str = 'anon'):
+@template()
+def index():
     return {
-            'user_name': user
+        'package_count': 274_000,
+        'release_count': 2_234_847,
+        'user_count': 73_874,
+        'packages': [
+            {'id': 'fastapi', 'summary': "A great web framework"},
+            {'id': 'uvicorn', 'summary': "Your favorite ASGI server"},
+            {'id': 'httpx', 'summary': "Requests for an async world"},
+        ]
     }
 
 
-@router.get('/')
-async def about():
+@router.get('/about')
+@template()
+def about():
     return {}

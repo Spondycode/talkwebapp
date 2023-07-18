@@ -14,4 +14,5 @@ def latest_packages(limit: int = 5) -> List:
         {"id": "fastapi", "summary": "A great web framework"},
         {"id": "uvicorn", "summary": "Your favorite ASGI server"},
         {"id": "httpx", "summary": "Requests for an async world"},
-    ]
+        {"id": "thingy", "summary": "Things for an thingy world"},
+    ][:limit]

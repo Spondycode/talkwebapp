@@ -1,20 +1,21 @@
 import fastapi
 from fastapi_chameleon import template
-from viewmodels.shared.viewmodel import ViewModelBase
-from viewmodels.home.indexviewmodel import IndexViewModel
 from starlette.requests import Request
+
+from viewmodels.home.indexviewmodel import IndexViewModel
+from viewmodels.shared.viewmodel import ViewModelBase
 
 router = fastapi.APIRouter()
 
 
-@router.get("/")
+@router.get('/')
 @template()
 def index(request: Request):
     vm = IndexViewModel(request)
     return vm.to_dict()
 
 
-@router.get("/about")
+@router.get('/about')
 @template()
 def about(request: Request):
     vm = ViewModelBase(request)

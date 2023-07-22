@@ -1,5 +1,5 @@
 import fastapi
-from fastapi_chameleon import template
+from fastapi_chameleon import response, template
 from starlette import status
 from starlette.requests import Request
 
@@ -54,6 +54,11 @@ def login(request: Request):
     return vm.to_dict()
 
 
-# @router.get("/account/logout")
-# def logout(request: Request):
-# return {}
+@router.get("/account/logout")
+def logout(request: Request):
+    response = fastapi.responses.RedirectResponse(
+        url="/", status_code=status.HTTP_302_FOUND
+    )
+    cookie_auth.logout(response)
+
+    return response
